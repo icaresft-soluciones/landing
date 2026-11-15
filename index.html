@@ -14,128 +14,291 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0B2D5B">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-:root{--navy:#0B2D5B;--navy2:#08224a;--blue:#007BFF;--fog:#E6ECF5;--ink:#2D3748;--white:#fff;--line:#d5deeb}
+:root{--navy:#0B2D5B;--navy2:#071d3d;--blue:#007BFF;--sky:#6fb5ff;--fog:#E6ECF5;--ink:#2D3748;--white:#fff;--line:#d5deeb;--mint:#19c37d;--sun:#ffd166}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--white);padding-bottom:78px}
-h1,h2,h3{font-family:Montserrat,Inter,system-ui,sans-serif;color:var(--navy);line-height:1.15;margin:0 0 .6em;text-wrap:balance}
-h1{font-size:2rem;font-weight:800;letter-spacing:-.01em}
-h2{font-size:1.5rem;font-weight:700}
-h3{font-size:1.05rem;font-weight:700;margin:0 0 .3em}
+body{margin:0;font:400 17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--white);padding-bottom:78px;overflow-x:hidden}
+h1,h2,h3{font-family:Montserrat,Inter,system-ui,sans-serif;color:var(--navy);line-height:1.08;margin:0 0 .5em;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,9vw,4.6rem);font-weight:900}
+h2{font-size:clamp(1.8rem,6vw,3rem);font-weight:900}
+h3{font-size:1.15rem;font-weight:800;letter-spacing:-.01em}
 p{margin:0 0 1em}
-.wrap{max-width:760px;margin:0 auto;padding:0 20px}
-section{padding:52px 0}
-header{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);color:var(--white);padding:20px 0 56px}
-header .brand{display:flex;align-items:center;gap:10px;margin-bottom:40px;font-family:Montserrat,sans-serif;font-weight:600;font-size:1.3rem;color:var(--white)}
-header .brand img{height:34px;width:auto}
-header h1{color:var(--white)}
-header .sub{color:var(--fog);font-size:1.1rem}
-.btn{display:block;text-align:center;background:var(--blue);color:var(--white);font:600 1.1rem Inter,system-ui,sans-serif;padding:17px 26px;border-radius:12px;text-decoration:none;margin-top:26px;box-shadow:0 6px 20px rgba(0,123,255,.35)}
-.btn:hover,.btn:focus-visible{background:#0066d6;outline:3px solid var(--fog);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding:84px 0}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.04em}
+.eyebrow{font:700 .78rem "JetBrains Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:14px;display:block}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--blue);color:var(--white);font:700 .95rem "JetBrains Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.04em;padding:19px 34px;border-radius:999px;text-decoration:none;box-shadow:0 10px 30px rgba(0,123,255,.4);transition:transform .15s,background .15s}
+.btn:hover,.btn:focus-visible{background:#0066d6;transform:translateY(-2px);outline:3px solid var(--sky);outline-offset:3px}
+.btn.claro{background:var(--white);color:var(--navy);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.btn.claro:hover,.btn.claro:focus-visible{background:var(--fog)}
 .btn[aria-disabled=true]{background:#8a97ab;pointer-events:none;box-shadow:none}
-.mini{font-size:.92rem;color:var(--fog);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 18px}
-.mini span::before{content:"\2713\00a0";color:#6fb5ff;font-weight:700}
+.btn.full{display:flex;width:100%}
+@media(max-width:480px){.btn{font-size:.8rem;padding:18px 20px;letter-spacing:.02em;white-space:nowrap}}
+
+/* nav */
+nav{position:absolute;top:0;left:0;right:0;z-index:3}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:22px;padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.35rem Montserrat,sans-serif;color:var(--white);text-decoration:none}
+.brand img{height:34px;width:auto}
+nav .pill{font:700 .78rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--white);border:1.5px solid rgba(255,255,255,.45);border-radius:999px;padding:11px 20px;text-decoration:none}
+nav .pill:hover{background:rgba(255,255,255,.12)}
+
+/* hero */
+header.hero{position:relative;color:var(--white);padding:150px 0 90px;background:
+ radial-gradient(900px 500px at 85% 10%,rgba(0,123,255,.55),transparent 60%),
+ linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px) 0 0/72px 72px,
+ linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px) 0 0/72px 72px,
+ linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);overflow:hidden}
+.hero .cols{display:grid;gap:56px;grid-template-columns:1fr;align-items:center}
+.hero h1{color:var(--white)}
+.hero h1 em{font-style:normal;color:var(--sky)}
+.hero .sub{font-size:1.2rem;color:var(--fog);max-width:34em;margin:22px 0 32px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chips span{font:500 .74rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 14px;color:var(--fog)}
+.chips span::before{content:"\2713\00a0";color:var(--mint);font-weight:700}
+
+/* celular animado */
+.phone{width:min(330px,100%);margin:0 auto;background:#0b0b10;border-radius:38px;padding:12px;box-shadow:0 40px 80px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.12);position:relative}
+.screen{background:#14141c;border-radius:28px;overflow:hidden;min-height:470px;display:flex;flex-direction:column}
+.ig-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #23232e;color:#fff;font:600 .86rem Inter,sans-serif}
+.ig-top i{width:30px;height:30px;border-radius:50%;background:var(--blue) url("favicon.svg") center/60% no-repeat;display:block}
+.post{margin:14px;border-radius:16px;background:linear-gradient(140deg,#0e3d7d,#007BFF);padding:22px 18px;color:#fff;font:800 1.15rem/1.15 Montserrat,sans-serif}
+.post small{display:block;font:500 .66rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;opacity:.8;margin-bottom:8px}
+.msgs{padding:0 14px 16px;display:flex;flex-direction:column;gap:10px;font:400 .84rem/1.4 Inter,sans-serif}
+.m{max-width:88%;border-radius:16px;padding:10px 13px;opacity:0;transform:translateY(10px);animation:in .5s forwards}
+.m.c{background:#23232e;color:#eee;align-self:flex-start;animation-delay:.6s}
+.m.r{background:#23232e;color:#cfd8e6;align-self:flex-start;margin-left:18px;animation-delay:2.2s}
+.m.d{background:var(--blue);color:#fff;align-self:flex-end;animation-delay:4s}
+.m.b{background:#fff;color:var(--navy);align-self:flex-end;font:700 .74rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:10px 16px;animation-delay:5.6s}
+.m b{display:block;font-size:.7rem;opacity:.7;font-weight:600;margin-bottom:2px}
+.tag-demo{position:absolute;right:-6px;top:-14px;background:var(--sun);color:#3a2a00;font:700 .68rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;padding:7px 12px;border-radius:999px;transform:rotate(4deg)}
+@keyframes in{to{opacity:1;transform:none}}
+
+/* franja */
+.franja{background:var(--blue);color:var(--white);overflow:hidden;padding:20px 0;white-space:nowrap}
+.franja .t{display:inline-flex;gap:46px;animation:marq 38s linear infinite;font:700 .9rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;padding-left:46px}
+.franja .t span::after{content:"\2726";margin-left:46px;opacity:.6}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* antes/despues */
+.ad{display:grid;gap:18px;grid-template-columns:1fr;margin-top:34px}
+.lado{border-radius:24px;padding:30px 26px}
+.lado.antes{background:var(--fog)}
+.lado.desp{background:var(--navy);color:var(--fog)}
+.lado h3{font-size:1.3rem;margin-bottom:.9em}
+.lado.desp h3{color:#fff}
+.lado ul{list-style:none;margin:0;padding:0}
+.lado li{padding:12px 0 12px 34px;position:relative;border-top:1px solid rgba(0,0,0,.09);font-size:1rem}
+.lado.desp li{border-top-color:rgba(255,255,255,.14)}
+.lado li:first-child{border-top:0}
+.lado li::before{position:absolute;left:0;top:12px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 .8rem Inter,sans-serif}
+.antes li::before{content:"\2715";background:#ffd9d9;color:#b3261e}
+.desp li::before{content:"\2713";background:var(--mint);color:#04321e}
+.lead{font-size:1.15rem;max-width:36em}
+
+/* tarjetas ejemplo */
+.grid{display:grid;gap:16px;grid-template-columns:1fr;margin-top:34px}
+.card{background:var(--white);border:1.5px solid var(--line);border-radius:22px;padding:26px 24px 12px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,45,91,.12);border-color:var(--blue)}
+.card .ic{width:52px;height:52px;border-radius:16px;background:var(--navy);color:var(--sky);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.card .ic svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card p{font-size:.98rem}
 .alt{background:var(--fog)}
-.grid{display:grid;gap:14px;grid-template-columns:1fr}
-.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px}
-.card p{font-size:.97rem;margin:0 0 .8em}
-.tag{display:inline-block;font-size:.78rem;font-weight:600;color:var(--blue);background:#e8f2ff;border-radius:99px;padding:2px 10px;margin-bottom:8px}
-.mapa{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px;margin:18px 0}
-.mapa small{display:block;color:#5b6778;margin-bottom:10px}
-.mapa ul{list-style:none;margin:0;padding:0}
-.mapa li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:.97rem}
-.mapa li:first-child{border-top:0}
-.si{color:#0a7a3d;font-weight:600;text-align:right}.no{color:#8a5a00;font-weight:600;text-align:right}
-.lista{list-style:none;padding:0;margin:0 0 1em}
-.lista li{margin-bottom:8px}
-ol.pasos{list-style:none;padding:0;margin:0;counter-reset:p}
-ol.pasos li{counter-increment:p;position:relative;padding:0 0 22px 58px}
-ol.pasos li::before{content:counter(p);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--white);font:700 1.1rem Montserrat,sans-serif;display:flex;align-items:center;justify-content:center}
-ol.pasos strong{display:block;color:var(--navy)}
-details{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600;color:var(--navy)}
-details p{margin:10px 0 0}
-.cta{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);color:var(--white);text-align:center}
-.cta h2{color:var(--white)}
-.cta p{color:var(--fog)}
 .nota{font-size:.92rem;color:#5b6778}
-footer{padding:28px 0;font-size:.9rem;color:#4a5568}
+
+/* mapa */
+.dos{display:grid;gap:44px;grid-template-columns:1fr;align-items:center}
+.mapa{background:var(--navy);color:var(--fog);border-radius:26px;padding:26px;box-shadow:0 30px 60px rgba(11,45,91,.3)}
+.mapa small{display:block;font:500 .7rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--sky);margin-bottom:14px}
+.mapa ul{list-style:none;margin:0;padding:0}
+.mapa li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.14);font-size:.98rem}
+.mapa li:first-child{border-top:0}
+.estado{font:700 .66rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.si{background:var(--mint);color:#04321e}.no{background:var(--sun);color:#3a2a00}
+.lista{list-style:none;padding:0;margin:0 0 1.2em}
+.lista li{margin-bottom:12px;padding-left:30px;position:relative}
+.lista li::before{content:"\2713";position:absolute;left:0;color:var(--blue);font-weight:800}
+
+/* pasos */
+.pasos{display:grid;gap:16px;grid-template-columns:1fr;margin-top:34px;counter-reset:p}
+.paso{counter-increment:p;background:var(--white);border:1.5px solid var(--line);border-radius:22px;padding:28px 26px;position:relative}
+.paso::before{content:"0" counter(p);font:900 3.4rem Montserrat,sans-serif;color:var(--fog);line-height:1;display:block;margin-bottom:10px;-webkit-text-stroke:2px var(--blue)}
+.paso strong{display:block;font:800 1.15rem Montserrat,sans-serif;color:var(--navy);margin-bottom:6px}
+
+/* faq */
+details{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:12px}
+details[open]{border-color:var(--blue)}
+summary{cursor:pointer;font-weight:600;color:var(--navy);list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:700 1.5rem "JetBrains Mono",monospace;color:var(--blue);line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin:12px 0 0}
+.faq{max-width:760px}
+
+/* cta final */
+.cta{position:relative;color:var(--white);text-align:center;padding:100px 0;background:
+ radial-gradient(700px 400px at 50% 0%,rgba(0,123,255,.55),transparent 65%),
+ linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px) 0 0/72px 72px,
+ linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px) 0 0/72px 72px,
+ linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%)}
+.cta h2{color:#fff;margin-left:auto;margin-right:auto;max-width:14em}
+.cta p{color:var(--fog);font-size:1.15rem;margin-bottom:30px}
+
+.priv h2{font-size:1.5rem;margin-top:0}
+.priv p{font-size:.95rem}
+footer{padding:30px 0;font-size:.9rem;color:#4a5568;border-top:1px solid var(--line)}
 footer a,.priv a{color:var(--navy)}
-.priv h2{margin-top:0}
-.barra{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));z-index:5;transform:translateY(110%);transition:transform .25s}
+
+.barra{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));z-index:5;transform:translateY(110%);transition:transform .25s}
 .barra.on{transform:none}
-.barra .btn{margin:0;padding:14px 20px;box-shadow:none}
-@media(min-width:700px){h1{font-size:2.8rem}h2{font-size:1.8rem}.btn{display:inline-block}.grid{grid-template-columns:1fr 1fr}.barra{display:none}body{padding-bottom:0}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.barra{transition:none}}
+.barra .btn{width:100%;padding:16px 20px;box-shadow:none}
+
+/* aparecer al scrollear */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.rv.on{opacity:1;transform:none}
+
+@media(min-width:820px){
+ section{padding:120px 0}
+ .hero .cols{grid-template-columns:1.15fr .85fr}
+ header.hero{padding:190px 0 120px}
+ .ad{grid-template-columns:1fr 1fr}
+ .grid{grid-template-columns:1fr 1fr}
+ .dos{grid-template-columns:1fr 1fr;gap:70px}
+ .pasos{grid-template-columns:repeat(3,1fr)}
+ .barra{display:none}
+ body{padding-bottom:0}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}.barra{transition:none}
+ .m{animation:none;opacity:1;transform:none}.franja .t{animation:none}.rv{opacity:1;transform:none;transition:none}
+}
 </style>
 </head>
 <body>
-<header>
-<div class="wrap">
-<div class="brand"><img src="logo-blanco.svg" alt="" width="31" height="34"><span>iCare</span></div>
-<h1>Te decimos qué tareas de tu negocio podés automatizar con IA. Gratis, en 30 minutos.</h1>
-<p class="sub">Para dueños de pymes de Argentina. Nos contás cómo laburás hoy (pedidos, turnos, stock, consultas por WhatsApp) y te marcamos qué conviene automatizar primero.</p>
-<a class="btn" href="#" data-reserva>Reservar mi auditoría gratis</a>
-<div class="mini"><span>30 minutos</span><span>Sin costo</span><span>Sin compromiso</span></div>
+<nav><div class="wrap">
+<a class="brand" href="#"><img src="logo-blanco.svg" alt="" width="31" height="34"><span>iCare</span></a>
+<a class="pill" href="#" data-reserva>Reservar</a>
+</div></nav>
+
+<header class="hero">
+<div class="wrap cols">
+<div>
+<span class="eyebrow" style="color:var(--sky)">Para dueños de pymes de Argentina</span>
+<h1>Dejá de repetir lo mismo todos los días. <em>Que lo haga la IA.</em></h1>
+<p class="sub">En 30 minutos y gratis te decimos qué tareas de tu negocio se pueden automatizar (pedidos, turnos, consultas por WhatsApp, planillas) y por cuál conviene empezar.</p>
+<a class="btn claro" href="#" data-reserva>Reservar mi auditoría gratis &rarr;</a>
+<div class="chips"><span>30 minutos</span><span>Sin costo</span><span>Sin compromiso</span></div>
+</div>
+<div style="position:relative">
+<div class="phone" aria-label="Ejemplo de comentario que dispara un mensaje privado automático">
+<span class="tag-demo">Así lo hacemos en nuestro Instagram</span>
+<div class="screen">
+<div class="ig-top"><i></i>icare.sistemas</div>
+<div class="post"><small>Reel</small>Webs y landing pages para tu pyme</div>
+<div class="msgs">
+<div class="m c"><b>cliente</b>PEDIDOS</div>
+<div class="m r"><b>icare.sistemas</b>Te lo mando por mensaje privado.</div>
+<div class="m d">Hola! Gracias por escribir. Acá podés reservar tu auditoría gratis de 30 minutos.</div>
+<div class="m b">Reservar auditoría</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </header>
+
+<div class="franja" aria-hidden="true"><div class="t">
+<span>Responder consultas</span><span>Cargar pedidos</span><span>Turnos y recordatorios</span><span>Presupuestos</span><span>Seguimiento de clientes</span><span>Reportes</span><span>Stock</span><span>Facturación</span>
+<span>Responder consultas</span><span>Cargar pedidos</span><span>Turnos y recordatorios</span><span>Presupuestos</span><span>Seguimiento de clientes</span><span>Reportes</span><span>Stock</span><span>Facturación</span>
+</div></div>
 
 <main>
 <section>
 <div class="wrap">
-<h2>Lo que más tiempo se le va a una pyme casi siempre se puede aliviar</h2>
-<div class="grid">
-<div class="card"><span class="tag">Ejemplo</span><h3>Responder lo mismo todos los días</h3><p>Precios, horarios, disponibilidad, estado de un pedido. Un asistente responde y vos entrás solo cuando hace falta.</p></div>
-<div class="card"><span class="tag">Ejemplo</span><h3>Pasar datos de un lado a otro</h3><p>Del mensaje a la planilla, de la planilla a la factura. Lo que hoy copiás a mano puede moverse solo.</p></div>
-<div class="card"><span class="tag">Ejemplo</span><h3>Turnos, recordatorios y seguimiento</h3><p>Confirmar, recordar y volver a contactar a quien no contestó, sin que nadie tenga que acordarse.</p></div>
-<div class="card"><span class="tag">Ejemplo</span><h3>Armar presupuestos y reportes</h3><p>Los mismos pasos cada vez. Se pueden preparar automáticamente para que solo los revises.</p></div>
+<span class="eyebrow rv">Hoy vs. con automatización</span>
+<h2 class="rv">Tu tiempo es para hacer crecer el negocio</h2>
+<div class="ad">
+<div class="lado antes rv"><h3>Hoy, a mano</h3><ul>
+<li>Respondés lo mismo una y otra vez por WhatsApp.</li>
+<li>Copiás datos de un mensaje a una planilla.</li>
+<li>Se te pasan clientes porque no llegás a contestar.</li>
+<li>Te acordás de los turnos de memoria.</li></ul></div>
+<div class="lado desp rv"><h3>Con un sistema que trabaja solo</h3><ul>
+<li>Un asistente contesta lo repetido; vos entrás cuando hace falta.</li>
+<li>Los datos viajan solos de un lado a otro.</li>
+<li>Cada consulta tiene respuesta, incluso fuera de horario.</li>
+<li>Confirmaciones y recordatorios salen automáticos.</li></ul></div>
 </div>
-<p class="nota" style="margin-top:6px">Son ejemplos de lo que solemos buscar. En la reunión vemos qué aplica de verdad en tu negocio, y qué no.</p>
 </div>
 </section>
 
 <section class="alt">
 <div class="wrap">
-<h2>Qué te llevás de la auditoría</h2>
-<p>Un mapa claro, por escrito, con tus tareas ordenadas así:</p>
-<div class="mapa" role="group" aria-label="Ejemplo ilustrativo de mapa de tareas">
-<small>Ejemplo ilustrativo del formato, no es un caso real</small>
-<ul>
-<li><span>Responder consultas repetidas</span><span class="si">Conviene automatizar</span></li>
-<li><span>Cargar pedidos en la planilla</span><span class="si">Conviene automatizar</span></li>
-<li><span>Negociar con un cliente grande</span><span class="no">Mejor a mano</span></li>
-</ul>
+<span class="eyebrow rv">Qué solemos encontrar</span>
+<h2 class="rv">Lo que más tiempo se le va a una pyme casi siempre se puede aliviar</h2>
+<div class="grid">
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/></svg></div><h3>Responder lo mismo todos los días</h3><p>Precios, horarios, disponibilidad, estado de un pedido. Un asistente responde y vos entrás solo cuando hace falta.</p></div>
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg></div><h3>Pasar datos de un lado a otro</h3><p>Del mensaje a la planilla, de la planilla a la factura. Lo que hoy copiás a mano puede moverse solo.</p></div>
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 11h18"/></svg></div><h3>Turnos, recordatorios y seguimiento</h3><p>Confirmar, recordar y volver a contactar a quien no contestó, sin que nadie tenga que acordarse.</p></div>
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></div><h3>Armar presupuestos y reportes</h3><p>Los mismos pasos cada vez. Se pueden preparar automáticamente para que solo los revises.</p></div>
 </div>
-<ul class="lista">
+<p class="nota" style="margin-top:22px">Son ejemplos de lo que solemos buscar. En la reunión vemos qué aplica de verdad en tu negocio, y qué no.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap dos">
+<div>
+<span class="eyebrow rv">Lo que te llevás</span>
+<h2 class="rv">Un mapa claro de tus tareas, por escrito</h2>
+<p class="lead rv">Sin vueltas: qué conviene automatizar, qué no, y en qué orden.</p>
+<ul class="lista rv">
 <li><strong>Prioridades:</strong> qué resolver primero según tu negocio.</li>
 <li><strong>Una propuesta concreta</strong> con alcance y precio, para que la evalúes tranquilo.</li>
+<li><strong>Es tuya:</strong> la podés usar para avanzar con nosotros o no.</li>
 </ul>
-<p>La propuesta es tuya: la podés usar para avanzar con nosotros o no.</p>
-<a class="btn" href="#" data-reserva>Quiero mi mapa de tareas</a>
+<a class="btn rv" href="#" data-reserva>Quiero mi mapa de tareas</a>
+</div>
+<div class="mapa rv" role="group" aria-label="Ejemplo ilustrativo de mapa de tareas">
+<small>Ejemplo ilustrativo del formato, no es un caso real</small>
+<ul>
+<li><span>Responder consultas repetidas</span><span class="estado si">Automatizar</span></li>
+<li><span>Cargar pedidos en la planilla</span><span class="estado si">Automatizar</span></li>
+<li><span>Recordar turnos</span><span class="estado si">Automatizar</span></li>
+<li><span>Negociar con un cliente grande</span><span class="estado no">Mejor a mano</span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="alt">
+<div class="wrap">
+<span class="eyebrow rv">Cómo funciona</span>
+<h2 class="rv">Tres pasos, ninguno complicado</h2>
+<div class="pasos">
+<div class="paso rv"><strong>Reservás un horario</strong>Elegís día y hora en el calendario. Tarda un minuto.</div>
+<div class="paso rv"><strong>Charlamos 30 minutos</strong>Virtual o presencial, como prefieras. Nosotros preguntamos, vos contás cómo laburás.</div>
+<div class="paso rv"><strong>Recibís la propuesta por escrito</strong>Qué se puede automatizar, en qué orden y cuánto costaría. Vos decidís.</div>
+</div>
 </div>
 </section>
 
 <section>
 <div class="wrap">
-<h2>Cómo funciona</h2>
-<ol class="pasos">
-<li><strong>Reservás un horario</strong>Elegís día y hora en el calendario. Tarda un minuto.</li>
-<li><strong>Charlamos 30 minutos</strong>Virtual o presencial, como prefieras. Nosotros preguntamos, vos contás cómo laburás.</li>
-<li><strong>Recibís la propuesta por escrito</strong>Qué se puede automatizar, en qué orden y cuánto costaría. Vos decidís.</li>
-</ol>
-</div>
-</section>
-
-<section class="alt">
-<div class="wrap">
-<h2>Preguntas frecuentes</h2>
+<span class="eyebrow rv">Preguntas frecuentes</span>
+<h2 class="rv">Lo que más nos preguntan</h2>
+<div class="faq rv">
 <details><summary>¿Es realmente gratis?</summary><p>Sí. La auditoría y la propuesta no tienen costo. Solo pagás si después decidís contratar algo.</p></details>
 <details><summary>¿Tengo que contratarles después?</summary><p>No. La propuesta es tuya y la podés usar como quieras.</p></details>
 <details><summary>No sé nada de tecnología, ¿sirve igual?</summary><p>Sí. No hace falta que sepas de sistemas ni de IA: alcanza con que cuentes cómo trabajás. Del resto nos encargamos nosotros.</p></details>
 <details><summary>¿Qué tengo que preparar?</summary><p>Nada. Si querés, pensá qué tareas repetitivas te cansan más en la semana.</p></details>
 <details><summary>¿Es una charla de ventas?</summary><p>No. Primero entendemos tu negocio; recién después hablamos de soluciones.</p></details>
+<details><summary>¿Usan IA para hacer su propio contenido?</summary><p>Sí, y lo decimos: parte del contenido de nuestro Instagram está hecho con IA y lo marcamos como tal.</p></details>
+</div>
 </div>
 </section>
 
@@ -143,12 +306,12 @@ footer a,.priv a{color:var(--navy)}
 <div class="wrap">
 <h2>Descubrí dónde se te va el tiempo</h2>
 <p>30 minutos, gratis y sin compromiso. Elegí el horario que te quede cómodo.</p>
-<a class="btn" href="#" data-reserva>Reservar mi auditoría gratis</a>
+<a class="btn claro" href="#" data-reserva>Reservar mi auditoría gratis &rarr;</a>
 </div>
 </section>
 
-<section class="priv" id="privacidad">
-<div class="wrap">
+<section class="priv" id="privacidad" style="padding:60px 0">
+<div class="wrap" style="max-width:820px">
 <h2>Privacidad</h2>
 <p>Esta página no usa cookies propias, no tiene formularios ni herramientas de análisis. Para mostrar las tipografías se cargan fuentes desde Google Fonts, que puede registrar tu dirección IP. Lo único que guarda la página es, en tu navegador y solo mientras la pestaña está abierta, los parámetros del enlace por el que llegaste (los que empiezan con <em>utm_</em>), para saber qué contenido nos trajo tu visita. No se guardan en ningún servidor nuestro.</p>
 <p>Al tocar el botón pasás a la página de reservas de Cal.com, un servicio de terceros. Ahí cargás tu nombre, tu email y lo que quieras contarnos, y Cal.com los procesa bajo sus propias condiciones. Nosotros usamos esos datos solo para coordinar la reunión y mandarte la propuesta. No los vendemos ni los compartimos.</p>
@@ -195,6 +358,13 @@ var CAL_URL = "https://cal.com/icare-software-grjqkh/auditoria";
   if (barra && hero && "IntersectionObserver" in window) {
     new IntersectionObserver(function (e) { barra.classList.toggle("on", !e[0].isIntersecting); }).observe(hero);
   }
+  var rv = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    rv.forEach(function (el) { io.observe(el); });
+  } else { rv.forEach(function (el) { el.classList.add("on"); }); }
 })();
 </script>
 </body>
